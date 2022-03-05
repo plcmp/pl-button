@@ -1,14 +1,16 @@
 import { PlElement, html, css } from "polylib";
 
 class PlButton extends PlElement {
-    
+
     static get properties() {
         return {
             label: { type: String, value: 'button' },
             disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
             variant: { type: String, value: 'secondary', reflectToAttribute: true },
             size: { type: String, value: 'medium' },
-            tabindex: { type: String, value: '0', reflectToAttribute: true}
+            tabindex: { type: String, value: '0', reflectToAttribute: true },
+            hidden: { type: Boolean, reflectToAttribute: true },
+            negative: { type: Boolean, reflectToAttribute: true }
         }
     }
 
@@ -29,6 +31,10 @@ class PlButton extends PlElement {
                 cursor: pointer;
                 outline:none;
                 transition: all .3s ease-in-out;
+            }
+
+            :host([hidden]) {
+                display: none;
             }
 
             .prefix {
@@ -58,131 +64,94 @@ class PlButton extends PlElement {
                 background: var(--primary-base);
             }
 
-            :host([variant=primary]:hover),:host([variant=primary]:focus) {
+            :host([variant=primary]:hover),
+            :host([variant=primary]:focus) {
                 background: var(--primary-dark);
-                outline:none;
             }
 
             :host([variant=primary]:active) {
                 background: var(--primary-darkest);
             }
 
-            :host([disabled][variant=primary]) {
-                background: var(--grey-light);
-                border: none;
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
+            /* primary-negative */
+            :host([variant=primary][negative]) {
+                --primary-base: var(--negative-base);
+                --primary-dark: var(--negative-dark);
+                --primary-darkest: var(--negative-darkest);
             }
 
             /* secondary */
             :host([variant=secondary]) {
-                background: var(--white);
+                background: var(--primary-lightest);
                 color: var(--primary-base);
-                border: 1px solid var(--primary-base);
-                
             }
 
             :host([variant=secondary]:hover),:host([variant=secondary]:focus) {
-                background: var(--primary-lightest);
-                border: 1px solid var(--primary-dark);
-                box-sizing: border-box;
-                outline:none;
+                background: var(--primary-light);
+                color: var(--primary-dark);
             }
 
             :host([variant=secondary]:active) {
-                background: var(--primary-light);
-                border: 1px solid var(--primary-darkest);
-                color:  var(--primary-darkest);
-                box-sizing: border-box;
+                background: var(--primary-base);
+                color: var(--primary-darkest);
             }
 
-            :host([disabled][variant=secondary]) {
-                background: var(--grey-light);
-                border: 1px solid var(--grey-light);
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
-            }
+
+
 
             /* ghost */
             :host([variant=ghost]) {
                 background: transparent;
-                color: var(--black-base);
-                border: 1px solid var(--grey-base);
+                color: var(--primary-base);
+                border: 1px solid var(--primary-base);
             }
 
             :host([variant=ghost]:hover),:host([variant=ghost]:focus) {
-                border: 1px solid var(--grey-dark);
-                background: var(--grey-lightest);
-                box-sizing: border-box;
-                outline:none;
+                border: 1px solid var(--primary-dark);
+                color: var(--primary-dark);
+                background: var(--primary-lightest);
             }
 
             :host([variant=ghost]:active) {
-                background: var(--grey-light);
-                border: 1px solid var(--grey-darkest);
-                color:  var(--primary-darkest);
-                box-sizing: border-box;
+                background: var(--primary-light);
+                color: var(--primary-darkest);
+                border: 1px solid var(--primary-darkest);
             }
 
-            :host([disabled][variant=ghost]) {
-                background: transparent;
-                border: 1px solid var(--grey-light);
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
-            }
 
             /* link */
             :host([variant=link]) {
                 background: transparent;
                 color: var(--primary-base);
-                border: 1px solid transparent;
             }
 
             :host([variant=link]:hover),:host([variant=link]:focus) {
-                background: transparent;
+                background: var(--primary-lightest);
                 color: var(--primary-dark);
-                border: 1px solid transparent;
-                outline:none;
             }
 
             :host([variant=link]:active) {
-                background: transparent;
+                background: var(--primary-light);
                 color:  var(--primary-darkest);
-                border: 1px solid transparent;
-            }
-
-            :host([disabled][variant=link]) {
-                background: transparent;
-                border: 1px solid var(--grey-light);
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
             }
 
             /* negative */
-            :host([variant=negative]) {
-                background: var(--negative-base);
+            :host([negative]) {
+                --primary-base: var(--negative-base);
+                --primary-light: var(--negative-light);
+                --primary-lightest: var(--negative-lightest);
+                --primary-dark: var(--negative-dark);
+                --primary-darkest: var(--negative-darkest);
             }
 
-            :host([variant=negative]:hover),:host([variant=negative]:focus) {
-                background: var(--negative-dark);
-                outline:none;
-            }
-
-            :host([variant=negative]:active) {
-                background: var(--negative-darkest);
-            }
-
-            :host([disabled][variant=negative]) {
+            :host([disabled]) {
                 background: var(--grey-light);
                 border: none;
                 color: var(--grey-dark);
                 cursor: not-allowed;
                 pointer-events: none;
-            }`;
+            }
+        `;
     }
 
     static get template() {
@@ -197,8 +166,8 @@ class PlButton extends PlElement {
         `
     };
 
-    disabledObserver(disabled){
-        if(disabled.value) {
+    disabledObserver(disabled) {
+        if (disabled.value) {
             this.tabIndex = -1;
         } else {
             this.tabIndex = 0;
