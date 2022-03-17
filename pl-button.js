@@ -6,7 +6,7 @@ class PlButton extends PlElement {
         return {
             label: { type: String, value: 'button' },
             disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
-            variant: { type: String, value: 'secondary', reflectToAttribute: true },
+            variant: { type: String, reflectToAttribute: true, value: 'secondary' },
             size: { type: String, value: 'medium' },
             tabindex: { type: String, value: '0', reflectToAttribute: true },
             hidden: { type: Boolean, reflectToAttribute: true },
@@ -17,7 +17,7 @@ class PlButton extends PlElement {
     static get css() {
         return css`
             :host {
-                display: inline-flex;
+                display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
@@ -30,7 +30,8 @@ class PlButton extends PlElement {
                 user-select: none;
                 cursor: pointer;
                 outline:none;
-                transition: all .3s ease-in-out;
+                transition: background .3s ease-in-out;
+                flex-shrink> 0;
             }
 
             :host([hidden]) {
@@ -84,20 +85,20 @@ class PlButton extends PlElement {
             :host([variant=secondary]) {
                 background: var(--primary-lightest);
                 color: var(--primary-base);
+                border: 1px solid var(--primary-light);
             }
 
             :host([variant=secondary]:hover),:host([variant=secondary]:focus) {
                 background: var(--primary-light);
                 color: var(--primary-dark);
+                border: 1px solid var(--primary-light);
             }
 
             :host([variant=secondary]:active) {
-                background: var(--primary-base);
+                background: var(--primary-light);
                 color: var(--primary-darkest);
+                border: 1px solid var(--primary-base);
             }
-
-
-
 
             /* ghost */
             :host([variant=ghost]) {
@@ -107,17 +108,16 @@ class PlButton extends PlElement {
             }
 
             :host([variant=ghost]:hover),:host([variant=ghost]:focus) {
-                border: 1px solid var(--primary-dark);
-                color: var(--primary-dark);
+                border: 1px solid var(--primary-base);
+                color: var(--primary-base);
                 background: var(--primary-lightest);
             }
 
             :host([variant=ghost]:active) {
                 background: var(--primary-light);
-                color: var(--primary-darkest);
-                border: 1px solid var(--primary-darkest);
+                color: var(--primary-dark);
+                border: 1px solid var(--primary-dark);
             }
-
 
             /* link */
             :host([variant=link]) {
@@ -126,12 +126,12 @@ class PlButton extends PlElement {
             }
 
             :host([variant=link]:hover),:host([variant=link]:focus) {
-                background: var(--primary-lightest);
+                background: transparent;
                 color: var(--primary-dark);
             }
 
             :host([variant=link]:active) {
-                background: var(--primary-light);
+                background: transparent;
                 color:  var(--primary-darkest);
             }
 
@@ -167,7 +167,7 @@ class PlButton extends PlElement {
     };
 
     disabledObserver(disabled) {
-        if (disabled.value) {
+        if (disabled) {
             this.tabIndex = -1;
         } else {
             this.tabIndex = 0;
