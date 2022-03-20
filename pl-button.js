@@ -7,7 +7,6 @@ class PlButton extends PlElement {
             label: { type: String, value: 'button' },
             disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
             variant: { type: String, reflectToAttribute: true, value: 'secondary' },
-            size: { type: String, value: 'medium' },
             tabindex: { type: String, value: '0', reflectToAttribute: true },
             hidden: { type: Boolean, reflectToAttribute: true },
             negative: { type: Boolean, reflectToAttribute: true }
@@ -21,17 +20,18 @@ class PlButton extends PlElement {
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                padding: 4px 12px;
-                height: 32px;
+                padding: var(--space-xs) var(--space-sm);
+                height: var(--base-size-md);
                 min-width: fit-content;
                 box-sizing: border-box;
-                border-radius: 4px;
-                color: #FFFFFF;
+                border-radius: var(--border-radius);
+                color: var(--primary-lightest);
                 user-select: none;
                 cursor: pointer;
                 outline:none;
-                transition: background .3s ease-in-out;
-                flex-shrink> 0;
+                transition: all .3s ease-in-out;
+                flex-shrink: 0;
+                font: var(--font-sm);
             }
 
             :host([hidden]) {
@@ -43,8 +43,7 @@ class PlButton extends PlElement {
             }
 
             .prefix ::slotted(*) {
-                margin-right: 8px;
-                margin-left: 0px;
+                margin-right: var(--space-sm);
                 width: 16px;
                 height: 16px;
             }
@@ -54,8 +53,7 @@ class PlButton extends PlElement {
             }
 
             .suffix ::slotted(*) {
-                margin-left: 8px;
-                margin-right: 0px;
+                margin-left: var(--space-sm);
                 width: 16px;
                 height: 16px;
             }
