@@ -126,11 +126,14 @@ class PlButton extends PlElement {
             :host([variant=link]:hover),:host([variant=link]:focus) {
                 background: transparent;
                 color: var(--primary-dark);
+                text-decoration: underline;
             }
 
             :host([variant=link]:active) {
                 background: transparent;
+                filter:none;
                 color:  var(--primary-darkest);
+                text-decoration: underline;
             }
 
             /* negative */
@@ -142,9 +145,33 @@ class PlButton extends PlElement {
                 --primary-darkest: var(--negative-darkest);
             }
 
-            :host([disabled]) {
+            :host([disabled][variant="primary"]) {
                 background: var(--grey-light);
                 border: none;
+                color: var(--grey-dark);
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            :host([disabled][variant="secondary"]) {
+                border: 1px solid var(--grey-light);
+                background: var(--grey-lightest);
+                color: var(--grey-dark);
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            :host([disabled][variant="ghost"]) {
+                border: 1px solid var(--grey-light);
+                background: transparent;
+                color: var(--grey-dark);
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            :host([disabled][variant="link"]) {
+                border: none
+                background: treansparent;
                 color: var(--grey-dark);
                 cursor: not-allowed;
                 pointer-events: none;
