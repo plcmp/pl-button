@@ -31,7 +31,7 @@ class PlButton extends PlElement {
                 outline:none;
                 transition: all .3s ease-in-out;
                 flex-shrink: 0;
-                font: var(--font-sm);
+                font: var(--text-font);
             }
 
             :host([hidden]) {
@@ -129,11 +129,18 @@ class PlButton extends PlElement {
                 text-decoration: underline;
             }
 
+            :host([variant=link]:hover) ::slotted(*),:host([variant=link]:focus) ::slotted(*){
+                filter: drop-shadow(0px 2px 1px rgba(51, 113, 109, 0.4));
+            }
+
             :host([variant=link]:active) {
                 background: transparent;
-                filter:none;
                 color:  var(--primary-darkest);
                 text-decoration: underline;
+            }
+
+            :host([variant=link]:active) ::slotted(*),:host([variant=link]:focus) ::slotted(*){
+                filter:none;
             }
 
             /* negative */
