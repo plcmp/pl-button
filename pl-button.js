@@ -32,28 +32,14 @@ class PlButton extends PlElement {
                 transition: all .3s ease-in-out;
                 flex-shrink: 0;
                 font: var(--text-font);
+                gap: 8px;
             }
 
             :host([hidden]) {
                 display: none;
             }
 
-            .prefix {
-                display: flex;
-            }
-
-            .prefix ::slotted(*) {
-                margin-right: var(--space-sm);
-                width: 16px;
-                height: 16px;
-            }
-
-            .suffix {
-                display: flex;
-            }
-
-            .suffix ::slotted(*) {
-                margin-left: var(--space-sm);
+            ::slotted(*) {
                 width: 16px;
                 height: 16px;
             }
@@ -188,13 +174,9 @@ class PlButton extends PlElement {
 
     static get template() {
         return html`
-            <span class="prefix">
-                <slot name="prefix"></slot>
-            </span>
+            <slot name="prefix"></slot>
             [[label]]
-            <span class="suffix">
-                <slot name="suffix"></slot>
-            </span>
+            <slot name="suffix"></slot>
         `
     };
 
