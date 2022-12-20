@@ -19,6 +19,7 @@ class PlButton extends PlElement {
                 --pl-button-background: var(--primary-base);
                 --pl-button-color: var(--primary-lightest);
                 --pl-button-border: 1px solid var(--primary-base);
+                flex-shrink: 0;
             }
 
             :host([hidden]) {
