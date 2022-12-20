@@ -1,132 +1,37 @@
 import { PlElement, html, css } from "polylib";
 
 class PlButton extends PlElement {
-
-    static get properties() {
-        return {
-            label: { type: String, value: 'button' },
-            disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
-            variant: { type: String, reflectToAttribute: true, value: 'secondary' },
-            tabindex: { type: String, value: '0', reflectToAttribute: true },
-            hidden: { type: Boolean, reflectToAttribute: true },
-            negative: { type: Boolean, reflectToAttribute: true }
-        }
+    static properties = {
+        label: { type: String, value: 'button' },
+        disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
+        variant: { type: String, reflectToAttribute: true, value: 'secondary' },
+        tabindex: { type: String, value: '0', reflectToAttribute: true },
+        hidden: { type: Boolean, reflectToAttribute: true },
+        negative: { type: Boolean, reflectToAttribute: true }
     }
 
-    static get css() {
-        return css`
+    static css = css`
             :host {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                padding: var(--space-xs) var(--space-sm);
-                height: var(--base-size-md);
-                min-width: fit-content;
-                box-sizing: border-box;
-                border-radius: var(--border-radius);
-                color: var(--primary-lightest);
-                user-select: none;
-                cursor: pointer;
                 outline:none;
-                transition: all .3s ease-in-out;
-                flex-shrink: 0;
+                display: block;
+                user-select: none;
                 font: var(--text-font);
-                gap: 8px;
+                --pl-button-background: var(--primary-base);
+                --pl-button-color: var(--primary-lightest);
+                --pl-button-border: 1px solid var(--primary-base);
             }
 
             :host([hidden]) {
                 display: none;
             }
 
-            ::slotted(*) {
-                width: 16px;
-                height: 16px;
+            :host([disabled]) {
+                cursor: not-allowed;
+                --pl-button-color: var(--grey-dark);
             }
 
-            /* primary */
-            :host([variant=primary]) {
-                background: var(--primary-base);
-            }
-
-            :host([variant=primary]:hover),
-            :host([variant=primary]:focus) {
-                background: var(--primary-dark);
-            }
-
-            :host([variant=primary]:active) {
-                background: var(--primary-darkest);
-            }
-
-            /* primary-negative */
-            :host([variant=primary][negative]) {
-                --primary-base: var(--negative-base);
-                --primary-dark: var(--negative-dark);
-                --primary-darkest: var(--negative-darkest);
-            }
-
-            /* secondary */
-            :host([variant=secondary]) {
-                background: var(--primary-lightest);
-                color: var(--primary-base);
-                border: 1px solid var(--primary-light);
-            }
-
-            :host([variant=secondary]:hover),:host([variant=secondary]:focus) {
-                background: var(--primary-light);
-                color: var(--primary-dark);
-                border: 1px solid var(--primary-light);
-            }
-
-            :host([variant=secondary]:active) {
-                background: var(--primary-light);
-                color: var(--primary-darkest);
-                border: 1px solid var(--primary-base);
-            }
-
-            /* ghost */
-            :host([variant=ghost]) {
-                background: transparent;
-                color: var(--primary-base);
-                border: 1px solid var(--primary-base);
-            }
-
-            :host([variant=ghost]:hover),:host([variant=ghost]:focus) {
-                border: 1px solid var(--primary-base);
-                color: var(--primary-base);
-                background: var(--primary-lightest);
-            }
-
-            :host([variant=ghost]:active) {
-                background: var(--primary-light);
-                color: var(--primary-dark);
-                border: 1px solid var(--primary-dark);
-            }
-
-            /* link */
-            :host([variant=link]) {
-                background: transparent;
-                color: var(--primary-base);
-            }
-
-            :host([variant=link]:hover),:host([variant=link]:focus) {
-                background: transparent;
-                color: var(--primary-dark);
-                text-decoration: underline;
-            }
-
-            :host([variant=link]:hover) ::slotted(*),:host([variant=link]:focus) ::slotted(*){
-                filter: drop-shadow(0px 2px 1px rgba(51, 113, 109, 0.4));
-            }
-
-            :host([variant=link]:active) {
-                background: transparent;
-                color:  var(--primary-darkest);
-                text-decoration: underline;
-            }
-
-            :host([variant=link]:active) ::slotted(*),:host([variant=link]:focus) ::slotted(*){
-                filter:none;
+            :host([disabled]) .wrapper{
+                pointer-events: none;
             }
 
             /* negative */
@@ -138,47 +43,138 @@ class PlButton extends PlElement {
                 --primary-darkest: var(--negative-darkest);
             }
 
-            :host([disabled][variant="primary"]) {
-                background: var(--grey-light);
-                border: none;
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
+            :host .wrapper {
+                display: flex;
+                align-items: center;
+                height: var(--base-size-md);
+                border-radius: var(--border-radius);
+                border: var(--pl-button-border);
+                cursor: pointer;
+                padding: var(--space-xs) var(--space-sm);
+                box-sizing: border-box;
+                gap: 8px;
+                background: var(--pl-button-background);
+                color: var(--pl-button-color);
+                transition: background .3s ease-in-out;
             }
 
-            :host([disabled][variant="secondary"]) {
-                border: 1px solid var(--grey-light);
-                background: var(--grey-lightest);
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
+            ::slotted(*) {
+                width: 16px;
+                height: 16px;
             }
 
-            :host([disabled][variant="ghost"]) {
-                border: 1px solid var(--grey-light);
-                background: transparent;
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
+            :host([variant=primary]) .wrapper:hover,
+            :host([variant=primary]) .wrapper:focus{
+                --pl-button-background: var(--primary-dark);
             }
 
-            :host([disabled][variant="link"]) {
-                border: none
-                background: treansparent;
-                color: var(--grey-dark);
-                cursor: not-allowed;
-                pointer-events: none;
+            :host([variant=primary]) .wrapper:active{
+                --pl-button-background: var(--primary-darkest);
+            }
+            
+            :host([variant=secondary]) .wrapper{
+                --pl-button-background: var(--primary-lightest);
+                --pl-button-color: var(--primary-base);
+                --pl-button-border: 1px solid var(--primary-light);
+            }
+
+            :host([variant=secondary]) .wrapper:hover,
+            :host([variant=secondary]) .wrapper:focus{
+                --pl-button-background: var(--primary-light);
+                --pl-button-color: var(--primary-dark);
+                --pl-button-border: 1px solid var(--primary-light);
+            }
+
+            :host([variant=secondary]) .wrapper:active{
+                --pl-button-background: var(--primary-light);
+                --pl-button-color: var(--primary-darkest);
+                --pl-button-border: 1px solid var(--primary-base);
+            }
+
+            /* ghost */
+            :host([variant=ghost]) .wrapper{
+                --pl-button-background: transparent;
+                --pl-button-color: var(--primary-base);
+                --pl-button-border: 1px solid var(--primary-base);
+            }
+
+            :host([variant=ghost]) .wrapper:hover,
+            :host([variant=ghost]) .wrapper:focus{
+                --pl-button-background: var(--primary-light);
+                --pl-button-color: var(--primary-dark);
+                --pl-button-border: 1px solid var(--primary-light);
+            }
+
+            :host([variant=ghost]) .wrapper:active{
+                --pl-button-background: var(--primary-light);
+                --pl-button-color: var(--primary-dark);
+                --pl-button-border: 1px solid var(--primary-dark);
+            }
+
+            /* link */
+            :host([variant=link]) {
+                --pl-button-background: transparent;
+                --pl-button-color: var(--primary-base);
+                --pl-button-border: 1px solid transparent;
+            }
+
+            :host([variant=link]) .wrapper:hover,:host([variant=link]) .wrapper:focus{
+                --pl-button-background: transparent;
+                --pl-button-color: var(--primary-dark);
+                text-decoration: underline;
+            }
+
+            :host([variant=link]) .wrapper:hover ::slotted(*),:host([variant=link]) .wrapper:focus ::slotted(*){
+                filter: drop-shadow(0px 2px 1px rgba(51, 113, 109, 0.4));
+            }
+
+            :host([variant=link]) .wrapper:active{
+                --pl-button-background: transparent;
+                --pl-button-color:  var(--primary-darkest);
+                text-decoration: underline;
+            }
+
+            :host([variant=link]:active) ::slotted(*){
+                filter:none;
+            }
+
+            :host([variant="primary"][disabled]) .wrapper, :host([variant="secondary"][disabled]) .wrapper{
+                --pl-button-background: var(--grey-light);
+                --pl-button-border: 1px solid var(--grey-light);
+                --pl-button-color: var(--grey-dark);
+            }
+
+            :host([disabled][variant="ghost"]) .wrapper{
+                --pl-button-border: 1px solid var(--grey-light);
+                --pl-button-color: var(--grey-dark);
+            }
+
+            :host([disabled][variant="link"]) .wrapper{
+                --pl-button-color: var(--grey-dark);
+            }
+
+            :host([disabled][variant=link]) ::slotted(*){
+                filter:none;
             }
         `;
-    }
 
-    static get template() {
-        return html`
+    static template = html`
+        <div class="wrapper">
             <slot name="prefix"></slot>
             [[label]]
+            <slot></slot>
             <slot name="suffix"></slot>
-        `
-    };
+        </div>
+    `;
+
+    constructor() {
+        super();
+        this.addEventListener('click', (e) => {
+            if(this.disabled) {
+                e.stopPropagation();
+            }
+        }, { capture: true })
+    }
 
     disabledObserver(disabled) {
         if (disabled) {
