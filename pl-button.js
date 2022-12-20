@@ -46,13 +46,13 @@ class PlButton extends PlElement {
             :host .wrapper {
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 height: var(--base-size-md);
                 border-radius: var(--border-radius);
                 border: var(--pl-button-border);
                 cursor: pointer;
                 padding: var(--space-xs) var(--space-sm);
                 box-sizing: border-box;
-                gap: 8px;
                 background: var(--pl-button-background);
                 color: var(--pl-button-color);
                 transition: background .3s ease-in-out;
@@ -62,6 +62,9 @@ class PlButton extends PlElement {
                 width: 16px;
                 height: 16px;
             }
+
+            ::slotted(*:last-of-type[slot="prefix"]) { padding-right: 8px }
+            ::slotted(*:first-of-type[slot="suffix"]) { padding-left: 8px }
 
             :host([variant=primary]) .wrapper:hover,
             :host([variant=primary]) .wrapper:focus{
