@@ -2,7 +2,7 @@ import { PlElement, html, css } from "polylib";
 
 class PlButton extends PlElement {
     static properties = {
-        label: { type: String, value: 'button' },
+        label: { type: String },
         disabled: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
         variant: { type: String, reflectToAttribute: true, value: 'secondary' },
         tabindex: { type: String, value: '0', reflectToAttribute: true },
