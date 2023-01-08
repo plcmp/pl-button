@@ -7,7 +7,8 @@ class PlButton extends PlElement {
         variant: { type: String, reflectToAttribute: true, value: 'secondary' },
         tabindex: { type: String, value: '0', reflectToAttribute: true },
         hidden: { type: Boolean, reflectToAttribute: true },
-        negative: { type: Boolean, reflectToAttribute: true }
+        negative: { type: Boolean, reflectToAttribute: true },
+        loading: { type: Boolean, reflectToAttribute: true }
     }
 
     static css = css`
@@ -17,7 +18,7 @@ class PlButton extends PlElement {
                 user-select: none;
                 font: var(--text-font);
                 --pl-button-background: var(--primary-base);
-                --pl-button-color: var(--primary-lightest);
+                --pl-button-color: white;
                 --pl-button-border: 1px solid var(--primary-base);
                 flex-shrink: 0;
             }
@@ -32,6 +33,14 @@ class PlButton extends PlElement {
             }
 
             :host([disabled]) .wrapper{
+                pointer-events: none;
+            }
+
+            :host([loading]) {
+                cursor: wait;
+            }
+
+            :host([loading]) .wrapper{
                 pointer-events: none;
             }
 
@@ -56,7 +65,7 @@ class PlButton extends PlElement {
                 box-sizing: border-box;
                 background: var(--pl-button-background);
                 color: var(--pl-button-color);
-                transition: background .3s ease-in-out;
+                transition: background .3s ease-in-out, border .3s ease-in-out;;
             }
 
             ::slotted(*) {
@@ -70,10 +79,12 @@ class PlButton extends PlElement {
             :host([variant=primary]) .wrapper:hover,
             :host([variant=primary]) .wrapper:focus{
                 --pl-button-background: var(--primary-dark);
+                --pl-button-border: 1px solid var(--primary-dark);
             }
 
             :host([variant=primary]) .wrapper:active{
                 --pl-button-background: var(--primary-darkest);
+                --pl-button-border: 1px solid var(--primary-darkest);
             }
             
             :host([variant=secondary]) .wrapper{
@@ -174,7 +185,7 @@ class PlButton extends PlElement {
     constructor() {
         super();
         this.addEventListener('click', (e) => {
-            if(this.disabled) {
+            if(this.disabled || this.loading) {
                 e.stopPropagation();
             }
         }, { capture: true })
