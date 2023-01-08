@@ -1,6 +1,6 @@
 {
     "name": "@plcmp/pl-button",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "description": "Simple button implementation.",
     "main": "pl-button.js",
     "repository": {
@@ -23,6 +23,6 @@
         }
     ],
     "dependencies": {
-        "polylib": "^1.0.0"
+        "polylib": "^1.1.9"
     }
 }
