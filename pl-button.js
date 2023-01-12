@@ -13,14 +13,16 @@ class PlButton extends PlElement {
 
     static css = css`
             :host {
-                outline:none;
                 display: block;
+                width: fit-content;
+                height: var(--base-size-md);
+                overflow: hidden;
+                outline:none;
                 user-select: none;
                 font: var(--text-font);
                 --pl-button-background: var(--primary-base);
                 --pl-button-color: white;
                 --pl-button-border: 1px solid var(--primary-base);
-                flex-shrink: 0;
             }
 
             :host([hidden]) {
@@ -55,9 +57,9 @@ class PlButton extends PlElement {
 
             :host .wrapper {
                 display: flex;
+                height: 100%;
                 align-items: center;
                 justify-content: center;
-                height: var(--base-size-md);
                 border-radius: var(--border-radius);
                 border: var(--pl-button-border);
                 cursor: pointer;
