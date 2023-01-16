@@ -16,6 +16,7 @@ class PlButton extends PlElement {
                 display: block;
                 width: fit-content;
                 height: var(--base-size-md);
+                flex-shrink: 0;
                 overflow: hidden;
                 outline:none;
                 user-select: none;
