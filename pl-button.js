@@ -79,8 +79,8 @@ export default class PlButton extends PlElement {
                 cursor: wait;
             }
 
-            ::slotted(*:last-of-type[slot="prefix"]) { padding-inline-end: var(--space-sm) }
-            ::slotted(*:first-of-type[slot="suffix"]) { padding-inline-start: var(--space-sm) }
+            :host ::slotted(*:first-of-type[slot="prefix"]) { padding-inline-end: var(--space-sm) }
+            :host ::slotted(*:last-of-type[slot="suffix"]) { padding-inline-start: var(--space-sm) }
 
             :host([variant=primary]:hover:not([loading],[disabled])),
             :host([variant=primary]:focus:not([loading],[disabled])){
