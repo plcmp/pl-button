@@ -56,6 +56,7 @@ export default class PlButton extends PlElement {
                 height: var(--base-size-md);
                 background: var(--primary-base);
                 color: var(--background-color);
+                border: 1px solid var(--primary-base);
                 border-radius: var(--border-radius);
                 font: var(--text-font);
                 flex-shrink: 0;
@@ -79,16 +80,18 @@ export default class PlButton extends PlElement {
                 cursor: wait;
             }
 
-            :host ::slotted(*:last-of-type[slot="prefix"]) { padding-inline-end: var(--space-sm) }
-            :host ::slotted(*:first-of-type[slot="suffix"]) { padding-inline-start: var(--space-sm) }
+            :host ::slotted(*[slot="prefix"]) { padding-inline-end: var(--space-sm) }
+            :host ::slotted(*[slot="suffix"]) { padding-inline-start: var(--space-sm) }
 
             :host([variant=primary]:hover:not([loading],[disabled])),
             :host([variant=primary]:focus:not([loading],[disabled])){
                 background: var(--primary-dark);
+                border: 1px solid var(--primary-darkest);
             }
 
             :host([variant=primary]:active:not([loading],[disabled])){
                 background: var(--primary-darkest);
+                border: 1px solid var(--primary-darkest);
             }
             
             :host([variant=secondary]){
