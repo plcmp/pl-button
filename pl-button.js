@@ -84,7 +84,7 @@ export default class PlButton extends PlElement {
             :host ::slotted(*[slot="suffix"]) { padding-inline-start: var(--space-sm) }
 
             :host([variant=primary]:hover:not([loading],[disabled])),
-            :host([variant=primary]:focus:not([loading],[disabled])){
+            :host([variant=primary]:focus-visible:not([loading],[disabled])){
                 background: var(--primary-dark);
                 border: 1px solid var(--primary-darkest);
             }
@@ -101,7 +101,7 @@ export default class PlButton extends PlElement {
             }
 
             :host([variant=secondary]:hover:not([loading],[disabled])),
-            :host([variant=secondary]:focus:not([loading],[disabled])){
+            :host([variant=secondary]:focus-visible:not([loading],[disabled])){
                 background: var(--primary-light);
                 color: var(--primary-dark);
                 border: 1px solid var(--primary-light);
@@ -121,7 +121,7 @@ export default class PlButton extends PlElement {
             }
 
             :host([variant=ghost]:hover:not([loading],[disabled])),
-            :host([variant=ghost]:focus:not([loading],[disabled])){
+            :host([variant=ghost]:focus-visible:not([loading],[disabled])){
                 background: var(--primary-light);
                 color: var(--primary-dark);
                 border: 1px solid var(--primary-light);
@@ -140,14 +140,14 @@ export default class PlButton extends PlElement {
                 border: 1px solid transparent;
             }
 
-            :host([variant=link]:hover:not([loading],[disabled])),:host([variant=link]:focus:not([loading],[disabled])){
+            :host([variant=link]:hover:not([loading],[disabled])),:host([variant=link]:focus-visible:not([loading],[disabled])){
                 background: transparent;
                 color: var(--primary-dark);
                 text-decoration: underline;
             }
 
             :host([variant=link]:hover:not([loading],[disabled])) ::slotted(*),
-            :host([variant=link]:focus:not([loading],[disabled])) ::slotted(*){
+            :host([variant=link]:focus-visible:not([loading],[disabled])) ::slotted(*){
                 filter: drop-shadow(0px 2px 1px rgba(51, 113, 109, 0.4));
             }
 
