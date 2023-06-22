@@ -42,7 +42,7 @@ export default class PlButton extends PlElement {
          * Reflects to attribute.
          * @type {boolean}
         */
-        loading: { type: Boolean, reflectToAttribute: true }
+        loading: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' }
     }
 
     static css = css`
@@ -207,14 +207,17 @@ export default class PlButton extends PlElement {
             if (this.disabled || this.loading) {
                 e.stopPropagation();
             }
-        }, { capture: true })
+        }, { capture: true });
+        
+        this.tabIndex = this.tabIndex != -1 ? this.tabIndex : 0;
     }
 
     disabledObserver(disabled) {
         if (disabled) {
+            this.lastTabIndex = this.tabIndex;
             this.tabIndex = -1;
         } else {
-            this.tabIndex = 0;
+            this.tabIndex = this.lastTabIndex;
         }
     }
 }
