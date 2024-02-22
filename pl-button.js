@@ -50,15 +50,15 @@ export default class PlButton extends PlElement {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 0 var(--space-sm);
+                padding: 0 var(--pl-space-sm);
                 box-sizing: border-box;
                 width: fit-content;
-                height: var(--base-size-md);
-                background: var(--primary-base);
-                color: var(--background-color);
-                border: 1px solid var(--primary-base);
-                border-radius: var(--border-radius);
-                font: var(--text-font);
+                height: var(--pl-base-size);
+                background: var(--pl-primary-base);
+                color: var(--pl-background-color);
+                border: 1px solid var(--pl-primary-base);
+                border-radius: var(--pl-border-radius);
+                font: var(--pl-text-font);
                 flex-shrink: 0;
                 overflow: hidden;
                 outline: none;
@@ -73,76 +73,76 @@ export default class PlButton extends PlElement {
 
             :host([disabled]) {
                 cursor: not-allowed;
-                color: var(--grey-dark);
+                color: var(--pl-grey-dark);
             }
 
             :host([loading]){
                 cursor: wait;
             }
 
-            :host ::slotted(*[slot="prefix"]) { padding-inline-end: var(--space-sm) }
-            :host ::slotted(*[slot="suffix"]) { padding-inline-start: var(--space-sm) }
+            :host ::slotted(*[slot="prefix"]) { padding-inline-end: var(--pl-space-sm) }
+            :host ::slotted(*[slot="suffix"]) { padding-inline-start: var(--pl-space-sm) }
 
             :host([variant=primary]:hover:not([loading],[disabled])),
             :host([variant=primary]:focus-visible:not([loading],[disabled])){
-                background: var(--primary-dark);
-                border: 1px solid var(--primary-darkest);
+                background: var(--pl-primary-dark);
+                border: 1px solid var(--pl-primary-darkest);
             }
 
             :host([variant=primary]:active:not([loading],[disabled])){
-                background: var(--primary-darkest);
-                border: 1px solid var(--primary-darkest);
+                background: var(--pl-primary-darkest);
+                border: 1px solid var(--pl-primary-darkest);
             }
             
             :host([variant=secondary]){
-                background: var(--primary-lightest);
-                color: var(--primary-base);
-                border: 1px solid var(--primary-light);
+                background: var(--pl-primary-lightest);
+                color: var(--pl-primary-base);
+                border: 1px solid var(--pl-primary-light);
             }
 
             :host([variant=secondary]:hover:not([loading],[disabled])),
             :host([variant=secondary]:focus-visible:not([loading],[disabled])){
-                background: var(--primary-light);
-                color: var(--primary-dark);
-                border: 1px solid var(--primary-light);
+                background: var(--pl-primary-light);
+                color: var(--pl-primary-dark);
+                border: 1px solid var(--pl-primary-light);
             }
 
             :host([variant=secondary]:active:not([loading],[disabled])){
-                background: var(--primary-light);
-                color: var(--primary-darkest);
-                border: 1px solid var(--primary-darkest);
+                background: var(--pl-primary-light);
+                color: var(--pl-primary-darkest);
+                border: 1px solid var(--pl-primary-darkest);
             }
 
             /* ghost */
             :host([variant=ghost]){
                 background: transparent;
-                color: var(--primary-base);
-                border: 1px solid var(--primary-base);
+                color: var(--pl-primary-base);
+                border: 1px solid var(--pl-primary-base);
             }
 
             :host([variant=ghost]:hover:not([loading],[disabled])),
             :host([variant=ghost]:focus-visible:not([loading],[disabled])){
-                background: var(--primary-light);
-                color: var(--primary-dark);
-                border: 1px solid var(--primary-light);
+                background: var(--pl-primary-light);
+                color: var(--pl-primary-dark);
+                border: 1px solid var(--pl-primary-light);
             }
 
             :host([variant=ghost]:active:not([loading],[disabled])){
-                background: var(--primary-light);
-                color: var(--primary-dark);
-                border: 1px solid var(--primary-dark);
+                background: var(--pl-primary-light);
+                color: var(--pl-primary-dark);
+                border: 1px solid var(--pl-primary-dark);
             }
 
             /* link */
             :host([variant=link]) {
                 background: transparent;
-                color: var(--primary-base);
+                color: var(--pl-primary-base);
                 border: 1px solid transparent;
             }
 
             :host([variant=link]:hover:not([loading],[disabled])),:host([variant=link]:focus-visible:not([loading],[disabled])){
                 background: transparent;
-                color: var(--primary-dark);
+                color: var(--pl-primary-dark);
                 text-decoration: underline;
             }
 
@@ -153,7 +153,7 @@ export default class PlButton extends PlElement {
 
             :host([variant=link]:active:not([loading],[disabled])){
                 background: transparent;
-                color:  var(--primary-darkest);
+                color:  var(--pl-primary-darkest);
                 text-decoration: underline;
             }
 
@@ -162,20 +162,20 @@ export default class PlButton extends PlElement {
             }
 
             :host([variant="primary"][disabled]), :host([variant="secondary"][disabled]){
-                background: var(--grey-light);
-                border: 1px solid var(--grey-light);
-                color: var(--grey-dark);
+                background: var(--pl-grey-light);
+                border: 1px solid var(--pl-grey-light);
+                color: var(--pl-grey-dark);
             }
 
             :host([disabled][variant="ghost"]){
                 background: transparent;
-                border: 1px solid var(--grey-light);
-                color: var(--grey-dark);
+                border: 1px solid var(--pl-grey-light);
+                color: var(--pl-grey-dark);
             }
 
             :host([disabled][variant="link"]){
                 background: transparent;
-                color: var(--grey-dark);
+                color: var(--pl-grey-dark);
                 text-decoration: none;
             }
 
@@ -183,22 +183,20 @@ export default class PlButton extends PlElement {
                 filter:none;
             }
 
-            /* negative */
             :host([negative]) {
-                --primary-base: var(--negative-base);
-                --primary-light: var(--negative-light);
-                --primary-lightest: var(--negative-lightest);
-                --primary-dark: var(--negative-dark);
-                --primary-darkest: var(--negative-darkest);
+                --pl-primary-base: var(--pl-negative-base);
+                --pl-primary-light: var(--pl-negative-light);
+                --pl-primary-lightest: var(--pl-negative-lightest);
+                --pl-primary-dark: var(--pl-negative-dark);
+                --pl-primary-darkest: var(--pl-negative-darkest);
             }
-
         `;
 
     static template = html`
-        <slot name="prefix"></slot>
+        <slot part="prefix" name="prefix"></slot>
         [[label]]
         <slot></slot>
-        <slot name="suffix"></slot>
+        <slot part="suffix" name="suffix"></slot>
     `;
 
     constructor() {
