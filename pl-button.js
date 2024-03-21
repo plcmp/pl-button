@@ -42,7 +42,14 @@ export default class PlButton extends PlElement {
          * Reflects to attribute.
          * @type {boolean}
         */
-        loading: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' }
+        loading: { type: Boolean, reflectToAttribute: true, observer: 'disabledObserver' },
+        
+        /**
+         * The button's size.
+         * Reflects to attribute.
+         * @type {string}
+        */
+        size: { type: String, reflectToAttribute: true }
     }
 
     static css = css`
@@ -195,7 +202,7 @@ export default class PlButton extends PlElement {
     static template = html`
         <slot part="prefix" name="prefix"></slot>
         [[label]]
-        <slot></slot>
+        <span class="MainSlot"><slot></slot></span>
         <slot part="suffix" name="suffix"></slot>
     `;
 
@@ -206,8 +213,12 @@ export default class PlButton extends PlElement {
                 e.stopPropagation();
             }
         }, { capture: true });
-        
-        this.tabIndex = this.tabIndex != -1 ? this.tabIndex : 0;
+    }
+    
+    connectedCallback(){
+      super.connectedCallback();
+      
+      this.tabIndex = this.tabIndex != -1 ? this.tabIndex : 0;
     }
 
     disabledObserver(disabled) {
