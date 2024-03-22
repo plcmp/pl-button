@@ -202,7 +202,7 @@ export default class PlButton extends PlElement {
     static template = html`
         <slot part="prefix" name="prefix"></slot>
         [[label]]
-        <span class="MainSlot"><slot></slot></span>
+        <span class="main-slot"><slot></slot></span>
         <slot part="suffix" name="suffix"></slot>
     `;
 
